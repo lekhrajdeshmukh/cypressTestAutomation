@@ -1,0 +1,10 @@
+**Difference between Cypress and Selenium**
+- Cypress is a complete framework whereas selenium is an API and you need to decide what programming language you need to use write test script.Similary what testing framework you want to use for selnium is upto you like TestNg, Nunit, Junit etc.
+- Cypress is way more faster than selenium. The reason behind that is is because Cypress using JavaScript and JavaScript is the only one native language for the web-browser. So when you run a cypress test it is executed inside of the browser without using the webdriver. So your test execution will be as fast as browser can actually render your web page and selenium with this comparision definitely not that fast as Cypress.
+- Cypress test are more stable as your test is executed inside of the browser in the same runloop and it don't have a dependencies with the webdriver and browser compatibility.
+- Cypress can test and mock APIs and selenium do not have capability. Mocking APIs in Cypress is a very power feature where you can configure what API response you are expecting from your backend. In can be useful to simulate some case scenarios like error message or something like that.
+- Cypress doesn not support IE and Safari browser. Initally it supported only chrome and electron browser. Since release of 2020 it started supporting Mozilla, Firefox and Microsoft Edge browser which is on the chromium engine.
+- Also cypress code is asynchronous 
+- Cypress does not support testing on the mobile devices or on the mobile emulators. What you can do is to test just responsive design in the browser, but you cannot actually test on the mobile devices like you can do with selenium and Appium.
+- Cypress only limited to run the test only for the single domain or for the single tab. For example, if you click on the link and browser open a new window and in selenium you can switch to this window and then made some operations over there in Cypress, you cannot do this. There is some workarounds when you can access the content of the new tab, but you will not be able to perform any actions on that tab.
+- Cypress is not friendly with iFrames.

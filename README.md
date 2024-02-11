@@ -1,0 +1,157 @@
+#Install cypress
+    - Prerequisite:
+        - Node.js
+        - npm or yarn : Those are Node.js package manager, npm is included with the installation of Node.js.
+        - For Ubuntu following needs to be installed:
+            - apt-get install libgtk2.0-0 libgtk-3-0 libgbm-dev libnotify-dev libnss3 libxss1 libasound2 libxtst6 xauth xvfb
+
+```console
+- Command to update existing npm installation
+    - npm install -g npm@latest
+    - g stands for global installation of npm 
+
+- Command to update nodejs
+    - sudo apt install nodejs
+
+```
+
+```console
+**If above installation command doesn't work then we can do this using nvm(Node version manager)**
+- First, install nvm if you haven't already:
+    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash
+
+- Close and reopen your terminal, or run the following command to start using nvm in the current session
+    source ~/.bashrc
+
+- Then, use nvm to install the latest LTS version of Node.js:
+    nvm install --lts
+
+- To use the newly installed version:
+    - nvm use --lts
+```
+
+**Note:** I was facing permission issue with respect to access to cache directory of cypress. error: "npm ERR! Cypress cannot write to the cache directory due to file permissions"
+- Below steps help to install the cypress again:
+    - sudo chown -R $(whoami) ~/.npm
+    - npx cypress install
+
+
+**- Command to clear cypress cache:**
+    - npx cypress cache clear
+
+
+**Steps to create cypress project**
+    - Initialize a new Node.js project
+        npm init -y
+
+    - Install cypress
+        npm install --save-dev cypress
+
+    - Once the installation is complete, you can open Cypress to setup the project structure and configuration.
+        npmx cypress open
+
+**Good to know**
+**npm** : It stands for `Node package manager`
+    - It is primarily used for installing and managing Node.js package and dependencies.
+    - It is a package manager that helps you download and manage package that your project depends on.
+    - It also allow you to specify and manage project dependencies in the `package.json` file
+    - Common commands includes:
+        - `npm install` : To install dependencies
+        - `npm init` : To initialize a new project
+        - `npm run` : To execute scripts defined in your package.json file
+
+**npx** : It stands for `Node package execute`
+    - `npx` is a tool that comes with npm(version 5.2.0 and higher) and is used to execute Node.js package
+    - It allows you to run binaries from locally installed packages or execute a package without the need for a global install.
+    - One common use case is to run a package that you don't want to install gloablly.
+    - Example: You can use `npx create-react-app my-app` to create a new React application without installing the `create-react-app` globally.
+    - npx also helps with running binaries from packages that are not in the local `node_modules/.bin` directory.
+
+- In summary `npm` is primarily for package management, while `npx` is for executing packages. Both works together to facilitate the developlment and execution of Node.js projects.
+
+**`Directory structures which cypress creates`**
+    - `fixtures` : Fixtures are a concept in testing that is used to assert the behaviour of a function.
+        - Example: Our Web application should display an appropriate message when zero results are returned from the back end. In this case, the number of results can be a fixture.
+    - `integration` : This is default home of our integration(end-to-end) test specs. Cypress discover and run the test inside the integration folder. It is convenient to group tests by common characteristics.
+        - Example: Login screen specs can be created in the integration/login/directory.
+    - `plugins` : Cypress is an extendable framework. It provides an API for adding more functionality on it. There are dozen of open source plugins available out there.
+        - For example, there is a plugin that extends Cypress to Run tests on multiple URLs at various viewport sizes or a plugin that provides Simple command that make it easy to target abd fill in Stripe Elements input fields.
+    - `support` : There are two files inside. The command.js and index.js. `Command.js` file allows you to define custom commands that can be used across your Cypress tests. Custom commands can help make your test code mode modular and readable by encapsulating repetitive or commonly used actions. The `index.js` file is loaded automatically before our test files are run. Usually we include the `command.js` file in `index.js`
+
+
+**`Cypress Core Concepts`**
+    - `Closures` : A closure is the combination of a function bundled together (enclosed) with references to its surrounding state(the lexical environment). In other words, a closure gives you access to an outer function's scope from an inner function.
+    - `Chainable` : In Cypress, we can chain multiple commands together so the result of the first command would be available for the second command. A command whose output can be used as input to another command is called **`Chainable`**. In addition each command output can be handled using the Promises **`then()`** method
+    - `Example`:
+        - cy.get("div.hl-popular-destinations-image-spacer").then($div => {  
+            // get() is Promise
+        // we could make assertion on div properties
+        });
+        - cy.get(".hl-popular-destinations-image-spacer")  // get() is Chainable
+            .first()    // first() is Chainable
+            .click()    // click() is Chainable
+            .then(() => {
+                cy.get(".b-visualnav__grid > .b-visualnav__tile")
+            .its("length")
+            .should("equal", 5);
+            })
+    - `Variable and Aliases`: 
+        - The concept of variable is unique to Cypress, in Cypress variables can be omitted in most cases.
+        - `Closure` gurantee us access to yielded objects.
+        - `Aliases` on other hand are part of Cypress API. We can use alises to perform a certain task or to get a specific resource without repeating the task over and over again.
+        - To create a new alias, we would use the `as()` command. Every alias can be referred to by a prefix of `@`
+        - Example:
+            - Here we create an alias called firstCateogry using the following code:
+                - it("first category alis", () => {
+                    cy.visit("https://www.ebay.com");
+                    cy.get("select#gh-cat > option").first().as("firstCategory"); **// The first option will have an alias of @firstCategory**
+                    cy.get("@firstCategory").then(($option) => {
+                        expect($option.text().toLowerCase()).equal("all categories");
+                    });
+                });
+            - Similarly, we can create an alias for a request to the back end:
+                describe("Uber Eats()", () => {
+                    it("Specific restaurant page returns 200 and has a HTML content-type",() =>{
+                        cy.request("https://www.ubereats.com/store/sliders-diner/V-WECNcvT86RbXMhlbyE-g").as("getStores");
+                        cy.get("@"getStores").should((response) => {
+                            expect(response.status).equal(200);
+                            expect(response.headers["content-type"]).contains("text/html;");
+                        });
+                    });
+                });
+        - `cy` is a special object which exposes all the commands. Using `cy` we are instructing the underlying browsers to do the actions we want.
+        - `Commands`:
+            - Cypress comes with a dozen of built-in commands, as well as an API to create custom commands and extend Cypress functionalities. Once registered, the commands are called directly by the cy object.
+            - Examples of widely used built-in commands:
+                - **visit()** : Changes the address of the underlying browsers to a given URL.
+                - **get()** : Return a DOM element by using either a selector or an alias.
+                - **intercept()** : Allows performing actions when specific web requests are made. For example, our test can verify that a special POST request is made to the backend when a user fills a resgistration form.
+            - Example of custom command:
+                - cy.Commands.add('login', (username, password) => {
+                    cy.visit('/login')
+                    cy.get('#username').type(username)
+                    cy.get('#password').type(password)
+                    cy.get('button[type="submit"]').click()
+                })
+            - Now we have to include this `commands.js` file under the cypress configuration file i.e index.js
+                - import './commands'
+            - Use custom commands in your tests:
+                - In your cypress test file, you can now use the custom commands you defined int the `commands.js` file.
+                - Example:
+                    describt('My Test Suite',()={
+                        it('should login in', () =>{
+                            cy.login('your_username', 'your_password')
+                        })
+                    })
+        - `Network interception`:
+            - Cypress is running a web browser, Cypress is able to sniff all traffic that goes to and from the `system under test`. This is very similar to network tab in Chrome DevTools, where we can observe the requests to the back-end by intercepting the requests, we are able to decide what to do when a specific request is made.
+            - Example: 
+                - It is pretty easy to assert that when a POST request to /login endpoint is made, it has username and password fields in the body.
+                cy.intercept('POST', '/login').as('login');  // create an alias for POST request which to the */login* endpoint
+                cy.visit('/login');                          // navigate to login page
+                cy.wait('@login').                           // wait for /login operation to complete
+                its('request').                              // access the request object
+                should('have,own.property','username').      // Assertion #1: The request body should contain the "username" field, and
+                and('have.own.property','password');         // Assertion #2: The request body should contain the "password" field.
+        - `stubs`:
+            - 
