@@ -154,4 +154,49 @@
                 should('have,own.property','username').      // Assertion #1: The request body should contain the "username" field, and
                 and('have.own.property','password');         // Assertion #2: The request body should contain the "password" field.
         - `stubs`:
+            - Stubs provide canned answers to calls made during the test, usually not responding not at all to anything outside what is programmed in for the test.
+            - A stub is a core concept in testing. By stubbing an object, we can represent a state in the system in order to observe the behaviour of our system in a predicted manner.
+            - The creation of stub is done using JSON fixture. The fixture wouls be saved to fixtures/<fileName.json>
+            - Stubs work great with network intercepts and we are able to replace the response of api with the previous fixture by calling the following command:
+                - cy.intercept("/login", {fixture: "user.json"})
+            - Another way to use stub in Cypress is by stubbing functions and using the stub()  command.
+            - Example:
+                const myShape = new Shape(2, 3);
+                cy.stub(myShape, "area").returns(30);  
+            - In the testing literature, stubs are often called fakes.
+            - Example: In the context of database testing, a stub might be used to simulate a database connection and return predefined data without actually querying a real database.
+        - `Mocks`:
+            - Mocks are objects pre-programmed with expectations which form a specification of the calls they are expected to receive.
+            - The main difference between stubs and mocks is, Stubs are used for particular testing of the system given specific objects, mocks are used to represent a predictable result(behaviour) of a bigger part of the business logic.
+            - `stubs`: How can we verify logic independently when it depends on indirect inputs from other software components? We replace a real object with a test-specific object that feeds the desired indirect inputs into the SUT.
+            - `mocks`: How do we implement behaviour verification for indirect outputs of the SUT? Replace an object the SUT depends on with a terst-specific object that verifies it is being used correctly by SUT.
+            - The rule of thumb is: When we want to test the state of the system we will use stub. When we want to test the behaviour of the system, we will use mocks.
+            - In Cypress, we are able to mock a back-end response using intercept() command.
+            - Example: In the case of testing a service that relies on an external API, a mock could be used to simulate the API responses and then verify that the service makes the expected API calls during the test.
+        - `waiting`:
+            - Cypress provides a special wait() command. It can be used in two cases:
+                1. To explicitly wait an amount of time before proceeding to the next command.
+                2. To wait for an aliased resource(s) to resolve before proceeding.
+            - Examples:
+                - wait 1 second between navigations:
+                    - cy.visit('/products')
+                      cy.wait(1000)
+                      cy.visit('/about')
+                - wait for a resource to resolve (using mock data)
+                    cy.intercept("/products", [
+                    { name: "iPhone 6", price: 150 },
+                    { name: "iPad", price: 99 }
+                    ]).as("getProducts");
+                    cy.visit("/products");
+                    cy.wait("@getProducts");
+        - `spies`:
+            - Spies, mocks and stubs are easy to get confused with each other.
+            - stub:
+                - A fake object which helps you to verify that the system performs as expected given the object. 
+            - Mock:
+                - A fake data that helps to verify that the system behaves as it should give the data.
+            - spy:
+                - In contrast to stub and mock, the spy does not prevent a function from doing its logic. Instead spy let us verify that a function was called.
+        - `Test Runner`:
             - 
+
