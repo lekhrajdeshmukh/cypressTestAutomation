@@ -198,5 +198,31 @@
             - spy:
                 - In contrast to stub and mock, the spy does not prevent a function from doing its logic. Instead spy let us verify that a function was called.
         - `Test Runner`:
-            - 
+            - Cypress GUI is called the test runner. It is minimialistic and provides the most important features for managing and running tests.
+            - To open the test runner, run below command inside a cypress project:
+                - npx cypress open
+        - `Command line` :
+            - Cypress can be operated in two modes:
+                - GUI: using test runner
+                - In headeless mode: This mode is intended for CI/CD processes, where Cypress is used as the test runner of the integration tests as part of the testing phase.
+                    - To run the test in headless mode:
+                        - npx cypress run [options]
+            - On some occassions, we will prefer to run a specific test spec. For that Cypress provides the --spec argument:
+                - npx cypress run --spec ./cypress/integration/<path-to-spec.js>
+            - When test fail in headless mode, by default, Cypress will do two things for us:
+                1. It will capture a screenshot of whole browser so we can get an idea of what went wrong.
+                2. Cypress will record a video of the test run from the beginning until the end. This way we might be able to spot the problem and solve it quickly.
+==============================================================================================
+**- Cypress vs Selenium WebDriver**
+    - Selenium WebDriver
+        - Selenium WebDriver is a framework for testing web applications by communicating with supported browsers using a driver.
+        - As per selenium website: Selenium automates browsers. That's it.
+        - Webdriver is a `remote-control-interface` that enables introspection and control of user-agents. It provides a platform and language-neutral wire protocol as a way for out of process programs to remotely instruct the behaviour of web browsers.
+        - It provides a set of interface to discover and manipulate DOM elements in web documents and to control the behaviour of user-agent.
+        - It is primarily intended to allow web authors to write tests that automate a user agent from a separate controlling process but may also be used in such a way as to allow in-browsers scripts to control a possibly separate browser.
+    - Selenium Grid:
+        - The Grid allows parallel testing across multiple machines.
+        - Using selenuimGrid we can test our application on different browsers, versions and operating systems. 
+    
+            
 

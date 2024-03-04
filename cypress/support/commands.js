@@ -23,3 +23,25 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+
+/// <reference types="cypress"/>
+
+Cypress.Commands.add('openHomePage', () => {
+    cy.visit('/')
+})
+
+Cypress.Commands.add('getSelectedDate', (dateField) => {
+    return cy.get(`[placeholder='${dateField}']`).invoke('prop', 'value')
+})
+
+Cypress.Commands.add('getFormattedDate', (dayOfMonth) => {
+    let currentDate = new Date()
+    currentDate.setDate(dayOfMonth)
+    if (currentDate.getDate() < dayOfMonth) {
+        currentDate.setMonth(currentDate.getMonth() + 1)
+    }
+    let options = { year: 'numeric', month: 'short', day: 'numeric' }
+    let formaatedDate = new Intl.DateTimeFormat('en-US', options).format(currentDate)
+    return formaatedDate
+})
+
