@@ -63,22 +63,22 @@ export class NavigationPage {
     }
 
     loginAuthPage(){
-        navigateToMainMenu('Tables & Data')
+        navigateToMainMenu('Auth')
         cy.contains('Login').click()
     }
 
     registerAuthPage(){
-        navigateToMainMenu('Tables & Data')
+        navigateToMainMenu('Auth')
         cy.contains('Register').click()
     }
 
     requestPasswordPage(){
-        navigateToMainMenu('Tables & Data')
+        navigateToMainMenu('Auth')
         cy.contains('Request Password').click()
     }
 
     resetPasswordPage(){
-        navigateToMainMenu('Tables & Data')
+        navigateToMainMenu('Auth')
         cy.contains('Reset Password').click()
     }
 }

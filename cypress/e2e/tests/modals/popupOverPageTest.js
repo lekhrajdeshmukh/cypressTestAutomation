@@ -11,6 +11,6 @@ describe('popover position tests', ()=>{
 
     it('Test to click on left popup button',()=>{
         onPopupOverPage.hoverOnLeftButton()
-        onPopupOverPage.element.popupOptionButton('Left').should('be.visible')
+        onPopupOverPage.element.hoverMessage().should('be.visible')
     })
 })
