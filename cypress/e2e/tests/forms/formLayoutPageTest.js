@@ -1,7 +1,8 @@
 /// <reference types="cypress" />
 
 import { onFormLayoutPage } from "../../../support/page_objects/forms/formLayoutPage"
-import { navigateTo } from "../../support/page_objects/navigationpage"
+import { navigateTo } from "../../../support/page_objects/navigation/navigationpage"
+
 
 describe(`Test for form layout page`, () => {
 

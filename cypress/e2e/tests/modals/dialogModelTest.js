@@ -1,7 +1,9 @@
 /// <reference types="cypress" />
 
-import { onDialogPage } from "../../../support/page_objects/modals/dialogModalPage"
+
+import { onDialogModalPage } from "../../../support/page_objects/modals/dialogModalPage"
 import { navigateTo } from "../../../support/page_objects/navigation/navigationpage"
+
 
 describe('Dialog specific test', () => {
     beforeEach('Open home page', () => {
@@ -10,8 +12,9 @@ describe('Dialog specific test', () => {
     })
 
     it('Open dialog with component', () =>{
-        onDialogPage.openDialogWithComponent()
-        onDialogPage.elements.isdialgBoxVisible().should('be.visible')
-        onDialogPage.dismissDialogBox()
+        onDialogModalPage.openDialogWithComponent()
+        onDialogModalPage.elements.isdialgBoxVisible().should('be.visible')
+        onDialogModalPage.dismissDialogBox()
     })
 })
+

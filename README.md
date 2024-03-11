@@ -212,6 +212,8 @@
             - When test fail in headless mode, by default, Cypress will do two things for us:
                 1. It will capture a screenshot of whole browser so we can get an idea of what went wrong.
                 2. Cypress will record a video of the test run from the beginning until the end. This way we might be able to spot the problem and solve it quickly.
+            - Run cypress test with sepcific browser:
+                - `npx cypress run --browser chrome`
 ==============================================================================================
 **- Cypress vs Selenium WebDriver**
     - Selenium WebDriver

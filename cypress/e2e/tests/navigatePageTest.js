@@ -1,6 +1,8 @@
 /// <reference types="cypress"/>
 
-import { navigateTo } from "../../support/page_objects/navigationpage"
+import { navigateTo } from "../../support/page_objects/navigation/navigationpage"
+
+
 
 describe(`Test to navigate to all sub-menus`, () => {
 

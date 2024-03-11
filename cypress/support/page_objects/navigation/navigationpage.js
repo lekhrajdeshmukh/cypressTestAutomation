@@ -11,6 +11,9 @@ function navigateToMainMenu(menuName) {
 }
 
 export class NavigationPage {
+    element = {
+        backButton : () => cy.get(`[data-name='arrow-back']`)
+    }
 
     formLayoutPage() {
         navigateToMainMenu('Forms')
@@ -65,21 +68,26 @@ export class NavigationPage {
     loginAuthPage(){
         navigateToMainMenu('Auth')
         cy.contains('Login').click()
+        this.element.backButton().click()
+
     }
 
     registerAuthPage(){
         navigateToMainMenu('Auth')
         cy.contains('Register').click()
+        this.element.backButton().click()
     }
 
     requestPasswordPage(){
         navigateToMainMenu('Auth')
         cy.contains('Request Password').click()
+        this.element.backButton().click()
     }
 
     resetPasswordPage(){
         navigateToMainMenu('Auth')
         cy.contains('Reset Password').click()
+        this.element.backButton().click()
     }
 }
 
