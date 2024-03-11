@@ -7,7 +7,7 @@ import { navigateTo } from "../../../support/page_objects/navigation/navigationp
 describe('Perform test for auth lgoin page', () => {
     beforeEach('Navigate to home page', () => {
         cy.openHomePage()
-        navigateTo.registerAuthPage()
+        navigateTo.registerPage()
     })
 
     it('Register new user', () => {

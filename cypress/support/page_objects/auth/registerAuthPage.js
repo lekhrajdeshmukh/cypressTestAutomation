@@ -10,7 +10,7 @@ class RegisterAuthPage {
         registerButton: () => cy.get('button'),
         homePageHeader: () => cy.get('ngx-header'),
         warningMessages: () => cy.get('p.caption.status-danger.ng-star-inserted'),
-        passwordWarningMessage: () => cy.contains('div','password').find('.caption.status-danger.ng-star-inserted')
+        passwordWarningMessage: () => cy.contains('div','Password').find('.caption.status-danger.ng-star-inserted')
     }
     registerNewUser(fullName, emailAddress, password) {
         this.element.fullName().type(fullName)

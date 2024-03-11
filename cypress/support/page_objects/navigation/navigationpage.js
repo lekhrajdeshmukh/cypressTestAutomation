@@ -78,6 +78,11 @@ export class NavigationPage {
         this.element.backButton().click()
     }
 
+    registerPage(){
+        navigateToMainMenu('Auth')
+        cy.contains('Register').click()
+    }
+
     requestPasswordPage(){
         navigateToMainMenu('Auth')
         cy.contains('Request Password').click()
