@@ -210,7 +210,7 @@
                 2. Cypress will record a video of the test run from the beginning until the end. This way we might be able to spot the problem and solve it quickly.
             - Run cypress test with sepcific browser:
                 - `npx cypress run --browser chrome`
-=======================================================================
+
 **- Cypress vs Selenium WebDriver**
     - Selenium WebDriver
         - Selenium WebDriver is a framework for testing web applications by communicating with supported browsers using a driver.
@@ -222,9 +222,7 @@
         - The Grid allows parallel testing across multiple machines.
         - Using selenuimGrid we can test our application on different browsers, versions and operating systems. 
     
-            
-=======================================================================
-**Environment variables in cypress**
+**- Environment variables in cypress**
     * There are multiple ways to declare or pass the environment variable using cypress
     * We can declare environment variable under cypress config file i.e. cypress.config.js
                 ```
