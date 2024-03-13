@@ -49,7 +49,7 @@
     - Once the installation is complete, you can open Cypress to setup the project structure and configuration.
         - npx cypress open
         
-**Good to know**
+**- Good to know**
     - **npm** : It stands for `Node package manager`
         - It is primarily used for installing and managing Node.js package and dependencies.
         - It is a package manager that helps you download and manage package that your project depends on.
@@ -66,7 +66,7 @@
         - npx also helps with running binaries from packages that are not in the local `node_modules/.bin` directory.
     - In summary `npm` is primarily for package management, while `npx` is for executing packages. Both works together to facilitate the developlment and execution of Node.js projects.
 
-**`Directory structures which cypress creates`**
+**-Directory structures which cypress creates**
     - `fixtures` : Fixtures are a concept in testing that is used to assert the behaviour of a function.
         - Example: Our Web application should display an appropriate message when zero results are returned from the back end. In this case, the number of results can be a fixture.
     - `integration` : This is default home of our integration(end-to-end) test specs. Cypress discover and run the test inside the integration folder. It is convenient to group tests by common characteristics.
@@ -75,7 +75,7 @@
         - For example, there is a plugin that extends Cypress to Run tests on multiple URLs at various viewport sizes or a plugin that provides Simple command that make it easy to target abd fill in Stripe Elements input fields.
     - `support` : There are two files inside. The command.js and index.js. `Command.js` file allows you to define custom commands that can be used across your Cypress tests. Custom commands can help make your test code mode modular and readable by encapsulating repetitive or commonly used actions. The `index.js` file is loaded automatically before our test files are run. Usually we include the `command.js` file in `index.js`
 
-**Cypress Core Concepts**
+**-Cypress Core Concepts**
     - `Closures` : A closure is the combination of a function bundled together (enclosed) with references to its surrounding state(the lexical environment). In other words, a closure gives you access to an outer function's scope from an inner function.
     - `Chainable` : In Cypress, we can chain multiple commands together so the result of the first command would be available for the second command. A command whose output can be used as input to another command is called **`Chainable`**. In addition each command output can be handled using the Promises **then()** method
     - `Example`:
@@ -210,7 +210,7 @@
                 2. Cypress will record a video of the test run from the beginning until the end. This way we might be able to spot the problem and solve it quickly.
             - Run cypress test with sepcific browser:
                 - `npx cypress run --browser chrome`
-==============================================================================================
+=======================================================================
 **- Cypress vs Selenium WebDriver**
     - Selenium WebDriver
         - Selenium WebDriver is a framework for testing web applications by communicating with supported browsers using a driver.
@@ -223,14 +223,16 @@
         - Using selenuimGrid we can test our application on different browsers, versions and operating systems. 
     
             
-================================================================================================
+=======================================================================
 **Environment variables in cypress**
     * There are multiple ways to declare or pass the environment variable using cypress
     * We can declare environment variable under cypress config file i.e. cypress.config.js
-        * ```env:{
+                ```
+                env:{
                 username: 'test@test.com',
                 password: 'Test$1234'
-                }```
+                }
+                ```
         * To refer above environment variable under cypress test we can use Cypress.env('<environmentName>')
         * Example: Cypress.env('username')
     * You can also define environment specific environment variable
@@ -239,7 +241,8 @@
         * "cy:test": "npx cypress open --env username=test@test.com,password=password#123"
         * When you  run cy:dev then it will take developement specific environment ans same goes for cy:test, it will test specific defined environment variable.
     * You can also define environment variable under cypress.config.js which takes value from command line
-        * e2e: ```{
+        * e2e: ```
+                {
                 setupNodeEvents(on, config){
                 const username = process.env.USER_NAME,
                 const password = process.env.PASSWORD
@@ -248,7 +251,8 @@
                 throw new Error('missing password environment variable')
                 }
                 config.env {username, password}
-                return config ```
+                return config 
+                ```
         * Pass the value for environment variable from command line
             USERNAME="test@test.com" PASSWORD="Test@1234" npx cypress run
     
