@@ -42,13 +42,12 @@
 
 **Steps to create cypress project**
     - Initialize a new Node.js project
-        npm init -y
-
+        - npm init -y
     - Install cypress
-        npm install --save-dev cypress
+        - npm install --save-dev cypress
 
     - Once the installation is complete, you can open Cypress to setup the project structure and configuration.
-        npmx cypress open
+        - npmx cypress open
 
 **Good to know**
 **npm** : It stands for `Node package manager`
@@ -78,10 +77,9 @@
         - For example, there is a plugin that extends Cypress to Run tests on multiple URLs at various viewport sizes or a plugin that provides Simple command that make it easy to target abd fill in Stripe Elements input fields.
     - `support` : There are two files inside. The command.js and index.js. `Command.js` file allows you to define custom commands that can be used across your Cypress tests. Custom commands can help make your test code mode modular and readable by encapsulating repetitive or commonly used actions. The `index.js` file is loaded automatically before our test files are run. Usually we include the `command.js` file in `index.js`
 
-
-**`Cypress Core Concepts`**
+**Cypress Core Concepts**
     - `Closures` : A closure is the combination of a function bundled together (enclosed) with references to its surrounding state(the lexical environment). In other words, a closure gives you access to an outer function's scope from an inner function.
-    - `Chainable` : In Cypress, we can chain multiple commands together so the result of the first command would be available for the second command. A command whose output can be used as input to another command is called **`Chainable`**. In addition each command output can be handled using the Promises **`then()`** method
+    - `Chainable` : In Cypress, we can chain multiple commands together so the result of the first command would be available for the second command. A command whose output can be used as input to another command is called **`Chainable`**. In addition each command output can be handled using the Promises **then()** method
     - `Example`:
         - cy.get("div.hl-popular-destinations-image-spacer").then($div => {  
             // get() is Promise
