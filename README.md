@@ -58,14 +58,12 @@
             - `npm install` : To install dependencies
             - `npm init` : To initialize a new project
             - `npm run` : To execute scripts defined in your package.json file
-    
     - **npx** : It stands for `Node package execute`
         - `npx` is a tool that comes with npm(version 5.2.0 and higher) and is used to execute Node.js package
         - It allows you to run binaries from locally installed packages or execute a package without the need for a global install.
         - One common use case is to run a package that you don't want to install gloablly.
         - Example: You can use `npx create-react-app my-app` to create a new React application without installing the `create-react-app` globally.
         - npx also helps with running binaries from packages that are not in the local `node_modules/.bin` directory.
-    
     - In summary `npm` is primarily for package management, while `npx` is for executing packages. Both works together to facilitate the developlment and execution of Node.js projects.
 
 **`Directory structures which cypress creates`**
