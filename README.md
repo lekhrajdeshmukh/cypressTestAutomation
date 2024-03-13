@@ -49,6 +49,7 @@
     - Once the installation is complete, you can open Cypress to setup the project structure and configuration.
         - npx cypress open
 **Good to know**
+
     -**npm** : It stands for `Node package manager`
         - It is primarily used for installing and managing Node.js package and dependencies.
         - It is a package manager that helps you download and manage package that your project depends on.
@@ -66,30 +67,37 @@
     - In summary `npm` is primarily for package management, while `npx` is for executing packages. Both works together to facilitate the developlment and execution of Node.js projects.
 
 **-Directory structures which cypress creates**
+
     - `fixtures` : Fixtures are a concept in testing that is used to assert the behaviour of a function.
         - Example: Our Web application should display an appropriate message when zero results are returned from the back end. In this case, the number of results can be a fixture.
+        
     - `integration` : This is default home of our integration(end-to-end) test specs. Cypress discover and run the test inside the integration folder. It is convenient to group tests by common characteristics.
         - Example: Login screen specs can be created in the integration/login/directory.
+        
     - `plugins` : Cypress is an extendable framework. It provides an API for adding more functionality on it. There are dozen of open source plugins available out there.
         - For example, there is a plugin that extends Cypress to Run tests on multiple URLs at various viewport sizes or a plugin that provides Simple command that make it easy to target abd fill in Stripe Elements input fields.
+    
     - `support` : There are two files inside. The command.js and index.js. `Command.js` file allows you to define custom commands that can be used across your Cypress tests. Custom commands can help make your test code mode modular and readable by encapsulating repetitive or commonly used actions. The `index.js` file is loaded automatically before our test files are run. Usually we include the `command.js` file in `index.js`
 
 **-Cypress Core Concepts**
+
     - `Closures` : A closure is the combination of a function bundled together (enclosed) with references to its surrounding state(the lexical environment). In other words, a closure gives you access to an outer function's scope from an inner function.
+    
     - `Chainable` : In Cypress, we can chain multiple commands together so the result of the first command would be available for the second command. A command whose output can be used as input to another command is called **Chainable**. In addition each command output can be handled using the Promises **then()** method
-    - `Example`:
-        - cy.get("div.hl-popular-destinations-image-spacer").then($div => {  
-            // get() is Promise
-        // we could make assertion on div properties
-        });
-        - cy.get(".hl-popular-destinations-image-spacer")  // get() is Chainable
-            .first()    // first() is Chainable
-            .click()    // click() is Chainable
-            .then(() => {
-                cy.get(".b-visualnav__grid > .b-visualnav__tile")
-            .its("length")
-            .should("equal", 5);
-            })
+        - `Example`:
+            - cy.get("div.hl-popular-destinations-image-spacer").then($div => {  
+                // get() is Promise
+            // we could make assertion on div properties
+            });
+            - cy.get(".hl-popular-destinations-image-spacer")  // get() is Chainable
+                .first()    // first() is Chainable
+                .click()    // click() is Chainable
+                .then(() => {
+                    cy.get(".b-visualnav__grid > .b-visualnav__tile")
+                .its("length")
+                .should("equal", 5);
+                })
+    
     - `Variable and Aliases`: 
         - The concept of variable is unique to Cypress, in Cypress variables can be omitted in most cases.
         - `Closure` gurantee us access to yielded objects.
@@ -138,7 +146,8 @@
                             cy.login('your_username', 'your_password')
                         })
                     })
-        - `Network interception`:
+    
+    - `Network interception`:
             - Cypress is running a web browser, Cypress is able to sniff all traffic that goes to and from the `system under test`. This is very similar to network tab in Chrome DevTools, where we can observe the requests to the back-end by intercepting the requests, we are able to decide what to do when a specific request is made.
             - Example: 
                 - It is pretty easy to assert that when a POST request to /login endpoint is made, it has username and password fields in the body.
@@ -148,7 +157,8 @@
                 its('request').                              // access the request object
                 should('have,own.property','username').      // Assertion #1: The request body should contain the "username" field, and
                 and('have.own.property','password');         // Assertion #2: The request body should contain the "password" field.
-        - `stubs`:
+    
+    - `stubs`:
             - Stubs provide canned answers to calls made during the test, usually not responding not at all to anything outside what is programmed in for the test.
             - A stub is a core concept in testing. By stubbing an object, we can represent a state in the system in order to observe the behaviour of our system in a predicted manner.
             - The creation of stub is done using JSON fixture. The fixture wouls be saved to fixtures/<fileName.json>
@@ -160,7 +170,8 @@
                 cy.stub(myShape, "area").returns(30);  
             - In the testing literature, stubs are often called fakes.
             - Example: In the context of database testing, a stub might be used to simulate a database connection and return predefined data without actually querying a real database.
-        - `Mocks`:
+    
+    - `Mocks`:
             - Mocks are objects pre-programmed with expectations which form a specification of the calls they are expected to receive.
             - The main difference between stubs and mocks is, Stubs are used for particular testing of the system given specific objects, mocks are used to represent a predictable result(behaviour) of a bigger part of the business logic.
             - `stubs`: How can we verify logic independently when it depends on indirect inputs from other software components? We replace a real object with a test-specific object that feeds the desired indirect inputs into the SUT.
@@ -168,7 +179,8 @@
             - The rule of thumb is: When we want to test the state of the system we will use stub. When we want to test the behaviour of the system, we will use mocks.
             - In Cypress, we are able to mock a back-end response using intercept() command.
             - Example: In the case of testing a service that relies on an external API, a mock could be used to simulate the API responses and then verify that the service makes the expected API calls during the test.
-        - `waiting`:
+    
+    - `waiting`:
             - Cypress provides a special wait() command. It can be used in two cases:
                 1. To explicitly wait an amount of time before proceeding to the next command.
                 2. To wait for an aliased resource(s) to resolve before proceeding.
@@ -184,7 +196,8 @@
                     ]).as("getProducts");
                     cy.visit("/products");
                     cy.wait("@getProducts");
-        - `spies`:
+    
+    - `spies`:
             - Spies, mocks and stubs are easy to get confused with each other.
             - stub:
                 - A fake object which helps you to verify that the system performs as expected given the object. 
@@ -192,11 +205,13 @@
                 - A fake data that helps to verify that the system behaves as it should give the data.
             - spy:
                 - In contrast to stub and mock, the spy does not prevent a function from doing its logic. Instead spy let us verify that a function was called.
-        - `Test Runner`:
+    
+    - `Test Runner`:
             - Cypress GUI is called the test runner. It is minimialistic and provides the most important features for managing and running tests.
             - To open the test runner, run below command inside a cypress project:
                 - npx cypress open
-        - `Command line` :
+    
+    - `Command line` :
             - Cypress can be operated in two modes:
                 - GUI: using test runner
                 - In headeless mode: This mode is intended for CI/CD processes, where Cypress is used as the test runner of the integration tests as part of the testing phase.
@@ -211,6 +226,7 @@
                 - `npx cypress run --browser chrome`
 
 **- Cypress vs Selenium WebDriver**
+
     - Selenium WebDriver
         - Selenium WebDriver is a framework for testing web applications by communicating with supported browsers using a driver.
         - As per selenium website: Selenium automates browsers. That's it.
@@ -222,6 +238,7 @@
         - Using selenuimGrid we can test our application on different browsers, versions and operating systems. 
     
 **- Environment variables in cypress**
+
     - There are multiple ways to declare or pass the environment variable using cypress
     - We can declare environment variable under cypress config file i.e. cypress.config.js
                 ```
