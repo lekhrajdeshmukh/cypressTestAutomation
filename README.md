@@ -48,9 +48,8 @@
 
     - Once the installation is complete, you can open Cypress to setup the project structure and configuration.
         - npx cypress open
-        
-**- Good to know**
-    - **npm** : It stands for `Node package manager`
+**Good to know**
+    -**npm** : It stands for `Node package manager`
         - It is primarily used for installing and managing Node.js package and dependencies.
         - It is a package manager that helps you download and manage package that your project depends on.
         - It also allow you to specify and manage project dependencies in the `package.json` file
@@ -77,7 +76,7 @@
 
 **-Cypress Core Concepts**
     - `Closures` : A closure is the combination of a function bundled together (enclosed) with references to its surrounding state(the lexical environment). In other words, a closure gives you access to an outer function's scope from an inner function.
-    - `Chainable` : In Cypress, we can chain multiple commands together so the result of the first command would be available for the second command. A command whose output can be used as input to another command is called **`Chainable`**. In addition each command output can be handled using the Promises **then()** method
+    - `Chainable` : In Cypress, we can chain multiple commands together so the result of the first command would be available for the second command. A command whose output can be used as input to another command is called **Chainable**. In addition each command output can be handled using the Promises **then()** method
     - `Example`:
         - cy.get("div.hl-popular-destinations-image-spacer").then($div => {  
             // get() is Promise
