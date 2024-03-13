@@ -227,4 +227,33 @@
         - Using selenuimGrid we can test our application on different browsers, versions and operating systems. 
     
             
-
+================================================================================================
+**Environment variables in cypress**
+    * There are multiple ways to declare or pass the environment variable using cypress
+    * We can declare environment variable under cypress config file i.e. cypress.config.js
+        * ```env:{
+                username: 'test@test.com',
+                password: 'Test$1234'
+                }```
+        * To refer above environment variable under cypress test we can use Cypress.env('<environmentName>')
+        * Example: Cypress.env('username')
+    * You can also define environment specific environment variable
+        * This you can define under package.json file
+        * "cy:dev": "npx cypress open --env username=dev@test.com,password=password#123"
+        * "cy:test": "npx cypress open --env username=test@test.com,password=password#123"
+        * When you  run cy:dev then it will take developement specific environment ans same goes for cy:test, it will test specific defined environment variable.
+    * You can also define environment variable under cypress.config.js which takes value from command line
+        * e2e: ```{
+                setupNodeEvents(on, config){
+                const username = process.env.USER_NAME,
+                const password = process.env.PASSWORD
+                }
+                if(!password){
+                throw new Error('missing password environment variable')
+                }
+                config.env {username, password}
+                return config ```
+        * Pass the value for environment variable from command line
+            USERNAME="test@test.com" PASSWORD="Test@1234" npx cypress run
+    
+        
